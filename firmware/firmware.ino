@@ -10,7 +10,7 @@
 uint8_t broadcast_mac[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 typedef struct struct_touch_message {
-    int touches[10];
+    int touches[9];
 } struct_touch_message;
 
 struct_touch_message outputData;
@@ -47,15 +47,14 @@ void setup() {
 
 void loop() {
   outputData.touches[0] = touchRead(4);
-  outputData.touches[1] = touchRead(0);
-  outputData.touches[2] = touchRead(2);
-  outputData.touches[3] = touchRead(15);
-  outputData.touches[4] = touchRead(13);
-  outputData.touches[5] = touchRead(12);
-  outputData.touches[6] = touchRead(14);
-  outputData.touches[7] = touchRead(27);
-  outputData.touches[8] = touchRead(32);
-  outputData.touches[9] = touchRead(33);
+  outputData.touches[1] = touchRead(2);
+  outputData.touches[2] = touchRead(15);
+  outputData.touches[3] = touchRead(13);
+  outputData.touches[4] = touchRead(12);
+  outputData.touches[5] = touchRead(14);
+  outputData.touches[6] = touchRead(27);
+  outputData.touches[7] = touchRead(32);
+  outputData.touches[8] = touchRead(33);
 
   esp_now_send(broadcast_mac, (uint8_t *) &outputData, sizeof(outputData));
   delay(10); // Send at 100Hz
