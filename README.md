@@ -1,7 +1,7 @@
 # espnow-capacitive-sensing
 
 <p align="center">
-  <img src="images/hardware-top.jpg" width="40%"/><img src="images/hardware-bottom.jpg" width="40%"/>
+  <img src="images/hw-top.jpg" width="40%"/><img src="images/hw-bottom.jpg" width="40%"/>
 </p>
 
 This repository contains...
