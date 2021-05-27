@@ -10,7 +10,7 @@
 uint8_t broadcast_mac[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 typedef struct struct_touch_message {
-    int touches[8];
+    int touches[10];
 } struct_touch_message;
 
 struct_touch_message outputData;
