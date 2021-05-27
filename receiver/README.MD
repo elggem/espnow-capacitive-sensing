@@ -10,6 +10,8 @@ sudo ifconfig wlp5s0 up
 sudo iwconfig wlp5s0 channel 1 
 ```
 
+To run the code execute `sudo ./bin/exec WIFI_IF_NAME`.
+
 # Source
 
 This code was originally taken from [thomasfla/Linux-ESPNOW](https://github.com/thomasfla/Linux-ESPNOW).
