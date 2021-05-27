@@ -37,7 +37,7 @@ void receive_callback(uint8_t src_mac[6], uint8_t *incomingData, int len) {
     for (int i=0;i<8;i++) {
     	printf("%i,", inputData.touches[i]);
     }
-    printf("\n");
+    printf("%i\n", inputData.touches[9]);
 }
 
 int main(int argc, char **argv) {
