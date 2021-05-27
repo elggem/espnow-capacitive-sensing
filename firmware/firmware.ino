@@ -16,6 +16,22 @@ typedef struct struct_touch_message {
 struct_touch_message outputData;
 esp_now_peer_info_t peerInfo;
 
+hw_timer_t * timer = NULL;
+
+void IRAM_ATTR sendData() {
+  outputData.touches[0] = touchRead(4);
+  outputData.touches[1] = touchRead(2);
+  outputData.touches[2] = touchRead(15);
+  outputData.touches[3] = touchRead(13);
+  outputData.touches[4] = touchRead(12);
+  outputData.touches[5] = touchRead(14);
+  outputData.touches[6] = touchRead(27);
+  outputData.touches[7] = touchRead(32);
+  outputData.touches[8] = touchRead(33);
+
+  esp_now_send(broadcast_mac, (uint8_t *) &outputData, sizeof(outputData));
+}
+
 void setup() {
   Serial.begin(115200);
 
@@ -33,7 +49,7 @@ void setup() {
   TRY_ESP_ACTION( esp_wifi_internal_set_fix_rate(ESP_IF_WIFI_STA, true, DATARATE), "Fixed rate set up");
   TRY_ESP_ACTION( esp_now_init(), "ESPNow Init");
   
-  esp_now_register_send_cb(OnDataSent);
+  //esp_now_register_send_cb(OnDataSent);
 
   // Register peer
   memcpy(peerInfo.peer_addr, broadcast_mac, 6);
@@ -43,21 +59,15 @@ void setup() {
   // Add peer
   TRY_ESP_ACTION( esp_now_add_peer(&peerInfo), "Add peer");
 
+  // Start timer to send data
+  timer = timerBegin(0, 80, true);
+  timerAttachInterrupt(timer, &sendData, true);
+  timerAlarmWrite(timer, 10000, true); //100Hz 
+  timerAlarmEnable(timer);
 }
 
 void loop() {
-  outputData.touches[0] = touchRead(4);
-  outputData.touches[1] = touchRead(2);
-  outputData.touches[2] = touchRead(15);
-  outputData.touches[3] = touchRead(13);
-  outputData.touches[4] = touchRead(12);
-  outputData.touches[5] = touchRead(14);
-  outputData.touches[6] = touchRead(27);
-  outputData.touches[7] = touchRead(32);
-  outputData.touches[8] = touchRead(33);
 
-  esp_now_send(broadcast_mac, (uint8_t *) &outputData, sizeof(outputData));
-  delay(10); // Send at 100Hz
 }
 
 // Callback when data is sent
