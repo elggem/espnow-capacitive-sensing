@@ -13,5 +13,5 @@ This repository contains code for experimenting with built-in capacitive touch f
 # Visualized example data
 
 <p align="center">
-  <img src="images/swiping-plot.png" width="100%"/>
+  <img src="images/swiping-plot-filtered.png" width="100%"/>
 </p>
