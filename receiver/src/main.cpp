@@ -21,7 +21,7 @@ Licensed under BSD-3
 using namespace std;
 
 typedef struct struct_touch_message {
-    int touches[8];
+    int touches[10];
 } struct_touch_message;
 
 struct_touch_message inputData;
